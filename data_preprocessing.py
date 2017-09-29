@@ -1,7 +1,8 @@
-import os
+import os, sys
 from PIL import Image
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from keras.datasets import mnist
 
 # Naming Conventions
 # X = input
@@ -28,6 +29,14 @@ def getdata_mnist():
     Raw_test = np.loadtxt('data/mnist_test.csv'.format(type), delimiter=',')
     X_test = Raw_test[:,1:]
     Tc_test = Raw_test[:,0].reshape(-1,1).astype(np.int32)
+    return X, Tc, X_test, Tc_test
+
+def getdata_mnist_from_keras():
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    X = x_train.reshape(-1, 28*28).astype(np.float64)
+    Tc = y_train.reshape(-1, 1)
+    X_test = x_test.reshape(-1, 28*28).astype(np.float64)
+    Tc_test = y_test.reshape(-1, 1)
     return X, Tc, X_test, Tc_test
 
 def one_hot_encode(Yc):
