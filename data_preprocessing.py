@@ -16,20 +16,31 @@ def getdata(dataset = ''):
     dataset = dataset if dataset != '' else 'pid' if len(sys.argv)<=1 else sys.argv[1]
     print('Using [{}] dataset'.format(dataset))
     return {
-        'pid': getdata_arnold,
+        'pid_ct': getdata_pid_ct,
+        'pid_ka': getdata_pid_ka,
+        'pid': getdata_pid_all,
         'mnist': getdata_mnist,
         'mnist_from_keras': getdata_mnist_from_keras,
     }[dataset]()
 
-def getdata_arnold():
+def getdata_pid(filename):
     TEST_SAMPLES = 600
-    Raw = np.loadtxt('data/arnold_ka-data.csv', delimiter=',')
+    Raw = np.loadtxt(filename, delimiter=',')
     np.random.shuffle(Raw)
     X = Raw[:-TEST_SAMPLES,0:-1]
     Tc = Raw[:-TEST_SAMPLES,-1].reshape(-1,1).astype(np.int32)
     X_test = Raw[-TEST_SAMPLES:,0:-1]
     Tc_test = Raw[-TEST_SAMPLES:,-1].reshape(-1,1).astype(np.int32)
     return X, Tc, X_test, Tc_test
+
+def getdata_pid_ka():
+    return getdata_pid('data/pid_ka_all.csv')
+
+def getdata_pid_ct():
+    return getdata_pid('data/pid_ct_all.csv')
+
+def getdata_pid_all():
+    return getdata_pid('data/pid_all.csv')
 
 def getdata_mnist():
     Raw = np.loadtxt('data/mnist_train.csv'.format(type), delimiter=',')
