@@ -10,8 +10,7 @@ def get_results(classifier, X, T):
 
 def train():
     utl.print_title('Getting data...')
-    X, Tc, X_test, Tc_test = dpp.getdata_arnold()
-    #X, Tc, X_test, Tc_test = dpp.getdata_mnist()
+    X, Tc, X_test, Tc_test = dpp.getdata()
 
     utl.print_title('Preparing data...')
     X, X_test = dpp.scale_data(X, X_test)

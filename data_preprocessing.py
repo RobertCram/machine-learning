@@ -12,6 +12,15 @@ from keras.datasets import mnist
 # P = prediction (one hot encoding probabilities)
 # Pc = prediction (classifications)
 
+def getdata(dataset = ''):
+    dataset = dataset if dataset != '' else 'pid' if len(sys.argv)<=1 else sys.argv[1]
+    print('Using [{}] dataset'.format(dataset))
+    return {
+        'pid': getdata_arnold,
+        'mnist': getdata_mnist,
+        'mnist_from_keras': getdata_mnist_from_keras,
+    }[dataset]()
+
 def getdata_arnold():
     TEST_SAMPLES = 600
     Raw = np.loadtxt('data/arnold_ka-data.csv', delimiter=',')
