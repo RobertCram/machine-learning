@@ -9,8 +9,8 @@ from keras.optimizers import Adam
 def build_model(input_nodes, hidden_nodes, output_nodes):
     adam = Adam(lr=1e-3)
     model = Sequential()
-    model.add(Dense(hidden_nodes, input_dim=input_nodes, activation='relu'))
-    model.add(Dense(output_nodes, activation='softmax'))
+    model.add(Dense(hidden_nodes, kernel_initializer='he_normal', input_dim=input_nodes, activation='relu'))
+    model.add(Dense(output_nodes, kernel_initializer='he_normal', activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
     return model
 
