@@ -3,6 +3,14 @@ from PIL import Image
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
+# Naming Conventions
+# X = input
+# Y = output
+# Tc = target (classifications)
+# T = target (one hot encodings)
+# P = prediction (one hot encoding probabilities)
+# Pc = prediction (classifications)
+
 def getdata_arnold():
     TEST_SAMPLES = 600
     Raw = np.loadtxt('data/arnold_ka-data.csv', delimiter=',')

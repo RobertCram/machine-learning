@@ -3,14 +3,6 @@ import numpy as np
 import data_preprocessing as dpp
 from sklearn.neural_network import MLPClassifier
 
-# Naming Conventions
-# X = input
-# Y = output
-# Tc = target (classifications)
-# T = target (one hot encodings)
-# P = prediction (one hot encoding probabilities)
-# Pc = prediction (classifications)
-
 def get_results(classifier, X, T):
     score = classifier.score(X, T)
     Pc = np.argmax(classifier.predict(X), axis=1)
